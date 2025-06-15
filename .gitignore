@@ -1,0 +1,15 @@
+.DS_Store
+.env
+.flaskenv
+*.pyc
+__pycache__/
+*.log
+*.tmp
+*.bak
+*~
+thumbs.db
+venv/  # Pasta do ambiente virtual Python
+.mypy_cache/
+.pytest_cache/
+.cache
+.vscode/

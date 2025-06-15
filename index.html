@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Imagem Interativa</title>
+  <link rel="stylesheet" href="estilo.css">
+  <!-- <link rel="stylesheet" href="estiloDARK.css"> -->
+  
+   
+</head>
+<body>
+
+  <h1 class="titulo">BOMBA RELÓGIO</h1>
+  
+  <h1 id="endmsg" style="display: none;">BOMBA DESARMADA COM SUCESSO!</h1>
+  
+    <button class="btn" onclick="mostrarRegrasJogo()" id="bRegras">Regras Jogo</button>
+    <div id="regrasJogo">
+      <h2>Vamos as Regras:</h2>
+      <ul>
+        <li>Desarmar a bomba cortando os fios na ordem certa antes que o tempo acabe.</li>
+        <li>Para cortar os fios clique com o mouse na curvatura do fio (ponto mais alto).</li>
+        <li>A bomba será ativada depois de clicar no botão "Iniciar Timer".</li>
+        <li>Ao clicar em iniciar o tempo de 5 minutos começa.</li>
+        <li>Assim que iniciar a contagem aparecerá o botão do primeiro desafio.</li>
+        <li>Rolagem para baixo nos desafios!</li>
+        <li>Resolva os desafios de forma correta e receberá uma dica sobre a ordem dos fios a serem cortados.</li>
+        <li>Resolva de forma errada e terá uma redução de 10 segundos no timer.</li>
+        <li>Vence quem consegue desarmar a bomba dentro do tempo estipulado</li>
+      </ul>
+    </div>
+
+  <div>
+    <button onclick="inicioTimer(this)" id="bIniciar">Iniciar Timer</button>
+    <!--nos botoes de DESAFIO colocar class=btn para os botoes ficarem igual-->
+  </div>
+  
+  
+  
+  <div id="areaDicas">
+    <h2>GUIA PARA DESARME:</h2>
+    
+    <p id="dicaFio1"></p>
+    <p id="dicaFio2"></p>
+    <p id="dicaFio3"></p>
+    <p id="dicaFio4"></p>
+    
+  </div>
+  <!--Add div class layout e bomba-wraper para manter bomba e pontos absolute relative-->
+  
+  <div class="layout">
+    
+    
+    
+      <div class="bomba-wrapper">
+        <img src="assets/imagens/bombarelogio.png" alt="Imagem Exemplo" id="imagem1" class="imagem visivel"/>
+        <div class="ponto" id="fioverde" onclick="cortarFioVerde('Você clicou no fio verde')"></div>
+        <div class="ponto" id="fioroxo" onclick="cortarFioRoxo('Você clicou no fio roxo')"></div>
+        <div class="ponto" id="fioamarelo" onclick="cortarFioAmarelo('Você clicou no fio amarelo')"></div>
+        <div class="ponto" id="fiolaranja" onclick="cortarFioLaranja('Você clicou no fio laranja')"></div>
+        <div class="ponto" id="fiociano" onclick="cortarFioCiano('Você clicou no fio ciano')"></div> 
+        
+        <div class="timer" id="timer-display"></div>
+            
+        
+        <img src="" alt="" id="fioVerdeCortado" class="verde">
+        <img src="" alt="" id="fioRoxoCortado" class="roxo">
+        <img src="" alt="" id="fioAmareloCortado" class="amarelo">
+        <img src="" alt="" id="fioLaranjaCortado" class="laranja">    
+        <img src="" alt="" id="fioCianoCortado" class="ciano">
+        
+        <img src="assets/imagens/emoji.jpg" id="emoji" class="emoji escondido" />
+        <img src="assets/imagens/bombaExpl.gif" alt="BOOOM" id="explosao" style="display: none;">
+      
+      </div>
+    </div>
+ 
+  
+  <div class="painelDesafios">
+    <div class="desafio" id="desafio1" style="display: none;">
+      <button class="btn" onclick="sortearPalavra()" id="bDesafio1" style="display: none;">DESAFIO 1</button>
+      <div id="palavra" style="display: none;">
+        <p>Adivinhe a palavra. Digite com a ACENTUAÇÃO correta
+          Se não souber clique em enviar. Uma nova palavra
+          aparecerá mas voce PERDERÁ 10 segundos no timer
+          Boa sorte!
+        </p>
+        <div class="linha">
+          <h3>Palavra embaralhada:</h3>
+          <p id="palavra-embaralhada"></p>
+          <h3>Dica da Palavra:</h3>    
+          <p id="dica-palavra"></p>
+        </div>
+        <input type="text" id="respostaPalavra" placeholder="Digite a sua resposta:">
+        <button class="btn" onclick="verificarRespostaPalavra()" id="verResposta">Enviar</button>
+        
+        <p id="resultado"></p>
+        
+      </div>
+    </div>
+    <div class="desafio" id="desafio2" style="display: none;">
+      
+      <button class="btn" onclick="mostrarCalculo()" id="bCalculos">DESAFIO 2</button>
+      <div id="calculo" style="display: none;">
+        <p>Matemática.
+          Resolva a opreração matematica e digite o resultado.
+          Podem haver resultados NEGATIVOS! Boa sorte!
+        </p>
+        <div class="linha">
+          <h3>Conta Matemática:</h3>
+          <p id="labelConta"></p>
+          <input type="number" id="conta" placeholder="Digite o resultado">
+        </div>
+        <button class="btn" onclick="verificarCalculo()"id="resultadoCalculo">Enviar</button>
+        <p id="resultadoCalc"></p>
+      </div>
+    <div class="desafio" id="desafio3" style="display: none;">
+      <button class="btn" onclick="mostrarAdivinhaNum()" id="bNumeros">DESAFIO 3</button>
+      <div id="numeros" style="display: none;">
+      <p>
+        Um numero entre 0 e 100 foi sorteado.
+        Voce deve adivinhar qual é. 
+        Voce tem 8 tentativas. Boa sorte!
+      </p>
+      <div class="linha">
+        <h3>Adivinhe o Numero:</h3>
+        <input type="number" id="palpiteNumSort" placeholder="Digite o seu palpite">
+      </div>
+      <button class="btn" onclick="verificarPalpite()" id="bResultadoPalpite">Enviar</button>
+
+      <p id="resultadoPalpite"></p>
+      <p id="registroPalpites"></p>
+    </div>
+
+    
+  </div>
+
+    <div class="desafio" id="desafio4" style="display: none;">
+      
+      <button class="btn" onclick="criarQuadrados()" id="bDesafio4" style="display: none;">DESAFIO 4</button>
+      <div id="quadrados" style="display: none;">
+        <p>Voce verá o quadrado maior mostrar uma sequencia de cores. Voce
+          terá de identificar a sequencia de cores clicando os quadrados menores na sequencia correta
+          
+        </p>
+        <div class="linha">
+          <h3>Sequencia de cores:</h3>
+          
+          <button onclick="iniciarSequenciaCores()" id="bIniciarSequencia" class="btn">Ver Sequencia</button>
+        </div>
+        <div class="containerQuadrados">
+          <div id="quadradoMaior" style="display: none;"></div>
+          <div id="areaQuadrados"></div>
+        </div>
+            <div class="linha">
+            <button onclick="limparCores()" class="btn">Limpar</button>
+            <button class="btn" onclick="verificarCoresUsuario()" id="verRespostaSequencia">Enviar</button>
+        </div>
+          <p id="resultadoSequencia"></p>
+
+
+        
+      </div>
+    </div>
+
+      </div>
+
+      </div>
+  </div>
+    
+  </div>
+  </body>
+  
+ 
+  <script src="js/util.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/desafios.js"></script>
+  <script src="js/bomba.js"></script>
+  
+</html>
+
