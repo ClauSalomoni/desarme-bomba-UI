@@ -21,6 +21,9 @@ A inspiração deste jogo foi um projeto que tinhamos que fazer para o mundo Sen
 -   **Adivinhe o número**: descubra o número secreto.
 -   **Sequência de cores**: memorize e repita a ordem correta.
 3. Desarme a bomba de acordo com as instruções recebidas antes que o tempo acabe.
+## Jogue agora: 
+Clique abaixo para acessar o jogo diretamente no navegador
+https://clausalomoni.github.io/desarme-bomba-UI/
 ## Como rodar:
 - Clone o repositório
 ```bash
